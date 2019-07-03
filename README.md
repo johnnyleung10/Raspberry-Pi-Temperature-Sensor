@@ -8,78 +8,56 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-*Raspberry Pi 3 with Raspbian
-*Phidget Precision Temperature Sensor ID:1124_0
-*External Remote Computer running Netbeans IDE
+* Raspberry Pi 3 with Raspbian
+* Phidget Interface Kit
+* Phidget Precision Temperature Sensor ID:1124_0
+* External Remote Computer running a Java IDE
+* Remote connection software PuTTY and Xming
+
+Install Java 8 on the Raspberry Pi if it is not already installed:
+
+```
+sudo apt-get install oracle-java8-jdk
+```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+#### Install the phidget drivers onto the Raspberry Pi. #### 
 
-Say what the step will be
+Instructions: https://www.phidgets.com/?view=articles&article=GetStartedPhidgetsRaspberry
+
+#### Enable SSH on Raspberry Pi. ####
+
+Instructions: https://www.raspberrypi.org/documentation/remote-access/ssh/
+
+Find the IP Address of Raspberry Pi by entering the following code into the Pi Terminal, is located under wlan0 in inet:
 
 ```
-Give the example
+ifconfig
 ```
+First download the repo and extract it from the .zip file. Open Netbeans and select "Open Project" and choose SensorGraphProject. Change any serial numbers and port numbers in the source code as needed. Connect Netbeans to the Raspberry Pi by setting up a new run profile. Create a new remote platform following this tutorial: https://www.youtube.com/watch?v=ebHbDlTnV-I
 
-And repeat
+#### Test to ensure that the platform is indeed connected, then run Netbeans Project to install the project onto the Pi. ####
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Netbeans will run into an expected "X11 display not found" error.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Open up the Raspberry Pi terminal using PuTTY. Make sure to enable X11 Forwarding and have Xming opened up. Type into PuTTY the following command:
 
 ```
-Give an example
+cd '/home/pi/NetBeansProjects//SensorGraphProject'; '/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre/bin/java'  -Dfile.encoding=UTF-8   -jar /home/pi/NetBeansProjects//SensorGraphProject/dist/SensorGraphProject.jar
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+This will run the Raspberry Pi Temperature Sensor and start up the GUI on the remote computer screen.
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Once running press the "Connect to Sensor" button to turn on the Phidget Sensors. Sensor Reading will automatically update with the current temperature. The "Graph" button will take the ongoing data and graph them out on a chart. The X axis represents time in the form of "Seconds from startup" while the Y axis displays temperature in Celcius.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* [Java](https://docs.oracle.com/javase/7/docs/api/) - The programming language used
+* [Phidget Library](https://www.phidgets.com/docs/Phidgets_Drivers) - Phidget Sensor Drivers
+* [Java Charts](http://www.jfree.org/jfreechart/) - Used to generate Graphs
+* [Raspberry Pi 3](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/) - Raspberry Pi 3 Model B
