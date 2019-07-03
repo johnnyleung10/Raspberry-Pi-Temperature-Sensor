@@ -13,6 +13,10 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class SensorGraph extends javax.swing.JFrame {
+    //Serial Variables FOR CHANGING
+    int serialNum = 35663;
+    int channelNum = 0;
+    
     //Sensor Variables
     LCD lcd=null;
     VoltageRatioInput vr1=null;
@@ -23,7 +27,7 @@ public class SensorGraph extends javax.swing.JFrame {
     RCServo servo2=null;
     RFID rfid = null;
     
-    //TempGraph Variables
+    //Temperature Graph Variables
     double[] values=new double[20];
     double seconds=0;
     double iterations=0;
@@ -261,8 +265,8 @@ public class SensorGraph extends javax.swing.JFrame {
                  }
              });
             
-          lcd.setDeviceSerialNumber(35663);
-          lcd.setChannel(0);
+          lcd.setDeviceSerialNumber(serialNum);
+          lcd.setChannel(channelNum);
           lcd.open(3000);
 
           lcd.setContrast(.50);
